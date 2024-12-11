@@ -1,0 +1,1 @@
+This is the backend folder which will contain all the server, route and model codes
