@@ -149,4 +149,31 @@ const deleteProducts = asyncHandler(async (req, res) => {
 });
 
 
-export {createProducts, deleteProducts, getProducts, updateProducts};
+const getProductId = asyncHandler(async (req, res) => {
+    try {
+        const productsId = req.params.id;
+        const products = await Products.findById(productsId);
+
+        if (!products) {
+            return res.status(404).json({
+                code: 404,
+                remark: 'Products not found',
+            });
+        }
+
+        res.json({
+            code: 200,
+            remark: 'success',
+            data: products,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            code: 500,
+            remark: 'failed',
+        });
+    }
+});
+
+
+export {createProducts, deleteProducts, getProducts, updateProducts, getProductId};
